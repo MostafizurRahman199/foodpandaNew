@@ -308,23 +308,142 @@
       }
 
       /* Button Design end */
+
+
+
+      @media screen and (max-width: 1024px) {
+        .food-images {
+          animation: scroll 30s linear infinite; /* Adjust speed for smaller screens */
+          padding: 20px; /* Reduce padding */
+        }
+
+        .food-img {
+          width: 80px; /* Adjust image size */
+          height: 80px;
+          margin-top: 50px; /* Adjust spacing */
+        }
+
+        .large-food-img {
+          width: 200px; /* Adjust large image size */
+          height: 180px;
+        }
+
+        .title {
+          font-size: 25px; /* Reduce title size */
+        }
+
+        .description {
+          font-size: 16px; /* Adjust text size */
+        }
+
+        .cta-button {
+          font-size: 16px;
+          padding: 10px 20px;
+        }
+      }
+
+      @media screen and (max-width: 600px) {
+        .food-images {
+          animation: scroll 40s linear infinite; /* Slower animation for smaller screens */
+          padding: 10px;
+        }
+
+        .food-img {
+          width: 60px; /* Further reduce image size */
+          height: 60px;
+          margin-top: 30px;
+        }
+
+        .large-food-img {
+          width: 150px;
+          height: 130px;
+        }
+
+        .title {
+          font-size: 20px;
+        }
+
+        .description {
+          font-size: 14px;
+        }
+
+        .cta-button {
+          font-size: 14px;
+          padding: 8px 16px;
+        }
+      }
+
+
+
+
+      /* popup responsive */
+
+      .pop-up {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(0, 0, 0, 0.8);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        z-index: 1000;
+        width: 90%; /* Makes pop-up responsive */
+        max-width: 400px; /* Prevents it from being too wide on large screens */
+      }
+
+      .pop-up img {
+        width: 100%;  /* Ensures the image scales properly */
+        height: auto; /* Maintains aspect ratio */
+        max-height: 80vh; /* Prevents the image from being too tall */
+        border-radius: 8px;
+        object-fit: contain; /* Ensures full image is visible */
+      }
+
+      .special-text {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-top: 10px;
+        color: white;
+      }
+
+      /* RESPONSIVE DESIGN */
+      @media screen and (max-width: 768px) {
+        .pop-up {
+          width: 80%; 
+          padding: 15px;
+        }
+        .special-text {
+          font-size: 1.3rem; 
+        }
+      }
+
+      @media screen and (max-width: 480px) {
+        .pop-up {
+          width: 90%;
+          padding: 10px;
+        }
+        .special-text {
+          font-size: 1.1rem;
+        }
+      }
+
+    
+
+
+
+
     </style>
   </head>
   <body>
     <div class="ad-container bg_image">
       <div class="food-images">
         <div class="food-img-wrapper large-img">
-          <a
-            href="https://www.foodpanda.com.bd/restaurants/new?lng=90.39959&lat=23.71325&vertical=restaurants&cuisines=73"
-            class="food-img"
-            target="_blank"
-          >
-            <img
-              src="images/panda.png"
-              alt="panda"
-              class="food-img large-food-img"
-            />
-          </a>
+         
+          <img src="images/panda.png" alt="panda" class="food-img large-food-img" data-url="https://www.foodpanda.com.bd/restaurants/new" onclick="goToLink(this)" style="cursor:pointer;">
+
+          
         </div>
 
         <div class="food-img-wrapper">
@@ -437,11 +556,14 @@
         <p class="description">
           Get 20% off on your first order. Limited time only!
         </p>
-        <a
+        <!-- <a
           href="https://www.foodpanda.com.bd/restaurants/new?lng=90.39959&lat=23.71325&vertical=restaurants&cuisines=73"
         >
           <button class="cta-button">Order Now</button>
-        </a>
+        </a> -->
+
+        <button class="cta-button" onclick="window.open(window.clickTag, '_blank');">Order Now</button>
+
       </div>
     </div>
 
@@ -450,19 +572,8 @@
       <p class="special-text">Special Ramadan Offer! 🎉</p>
     </div>
 
-    <!-- <audio id="background-audio" autoplay loop muted="false">
-        <source src="ramadan-reverie-middle-east-ramadan-music-278003.mp3" type="audio/mpeg">
-        <source src="ramadan-reverie-middle-east-ramadan-music-278003.ogg" type="audio/ogg">
-        Your browser does not support the audio element.
-    </audio> -->
 
     <!-- <audio id="background-audio" autoplay loop>
-        <source src="ramadan-reverie-middle-east-ramadan-music-278003.mp3" type="audio/mpeg">
-        <source src="ramadan-reverie-middle-east-ramadan-music-278003.ogg" type="audio/ogg">
-        Your browser does not support the audio element.
-    </audio> -->
-
-    <audio id="background-audio" autoplay loop>
       <source
         src="ramadan-reverie-middle-east-ramadan-music-278003.mp3"
         type="audio/mpeg"
@@ -472,9 +583,18 @@
         type="audio/ogg"
       />
       Your browser does not support the audio element.
+    </audio> -->
+
+    <audio id="background-audio">
+        <source src="ramadan-reverie-middle-east-ramadan-music-278003.mp3" type="audio/mpeg">
     </audio>
+    
 
     <script>
+
+        var clickTag = "https://www.foodpanda.com.bd/restaurants/new";
+
+
       function orderNow() {
         alert("Thank you for ordering! Your delicious meal is on the way 🍔");
       }
@@ -535,56 +655,87 @@
       let scrollDuration = 15000; // 20 seconds for full scroll
       setInterval(showPopUp, scrollDuration);
 
+    //   main 
       // Play audio after the document is loaded
+    //   document.addEventListener("DOMContentLoaded", function () {
+    //     let audio = document.getElementById("background-audio");
 
-      document.addEventListener("DOMContentLoaded", function () {
-        let audio = document.getElementById("background-audio");
+    //     function playAudio() {
+    //       audio.muted = true; // Start muted (bypasses restrictions)
+    //       audio.volume = 0; // Start with volume 0
 
-        function playAudio() {
-          audio.muted = true; // Start muted (bypasses restrictions)
-          audio.volume = 0; // Start with volume 0
+    //       let playPromise = audio.play();
 
-          let playPromise = audio.play();
+    //       if (playPromise !== undefined) {
+    //         playPromise
+    //           .then(() => {
+    //             console.log("Audio started successfully.");
 
-          if (playPromise !== undefined) {
-            playPromise
-              .then(() => {
-                console.log("Audio started successfully.");
+    //             // Unmute & gradually increase volume after a delay
+    //             setTimeout(() => {
+    //               audio.muted = false;
+    //               let volume = 0;
+    //               let fadeIn = setInterval(() => {
+    //                 if (volume < 1) {
+    //                   volume += 0.1;
+    //                   audio.volume = volume.toFixed(1);
+    //                 } else {
+    //                   clearInterval(fadeIn);
+    //                 }
+    //               }, 200); // Increase volume every 200ms
+    //             }, 1000); // Start increasing volume after 1 second
+    //           })
+    //           .catch((error) => {
+    //             console.log("Auto-play blocked, retrying...");
+    //             setTimeout(playAudio, 1000); // Retry every 1 second if blocked
+    //           });
+    //       }
+    //     }
 
-                // Unmute & gradually increase volume after a delay
-                setTimeout(() => {
-                  audio.muted = false;
-                  let volume = 0;
-                  let fadeIn = setInterval(() => {
-                    if (volume < 1) {
-                      volume += 0.1;
-                      audio.volume = volume.toFixed(1);
-                    } else {
-                      clearInterval(fadeIn);
-                    }
-                  }, 200); // Increase volume every 200ms
-                }, 1000); // Start increasing volume after 1 second
-              })
-              .catch((error) => {
-                console.log("Auto-play blocked, retrying...");
-                setTimeout(playAudio, 1000); // Retry every 1 second if blocked
-              });
-          }
+    //     // Ensure audio is loaded and can play
+    //     audio.addEventListener("canplaythrough", playAudio);
+
+    //     // Try playing the audio immediately
+    //     playAudio();
+    //   });
+
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    let audio = document.getElementById("background-audio");
+    let audioStarted = false; // Ensure audio only starts once
+
+    function tryPlayAudio() {
+        if (!audioStarted) {
+            let playPromise = audio.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    console.log("Audio started successfully.");
+                    audioStarted = true; // Mark as played to prevent multiple triggers
+                }).catch(error => {
+                    console.log("Auto-play blocked, waiting for user interaction.");
+                    document.addEventListener("click", tryPlayAudio, { once: true });
+                });
+            }
         }
+    }
 
-        // Ensure audio is loaded and can play
-        audio.addEventListener("canplaythrough", playAudio);
+    // Add hover and click listeners immediately after page load
+    document.addEventListener("mouseenter", tryPlayAudio, { once: true });
+    document.addEventListener("click", tryPlayAudio, { once: true });
+});
 
-        // Try playing the audio immediately
-        playAudio();
-      });
 
+      
       function goToLink(element) {
         var url = element.getAttribute("data-url"); // Get the correct URL from `data-url`
         if (url) {
           window.open(url, "_blank"); // Open the correct link in a new tab
         }
       }
+
+
     </script>
   </body>
 </html>
